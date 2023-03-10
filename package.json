@@ -35,5 +35,9 @@
     "commitizen": {
       "path": "@commitlint/cz-commitlint"
     }
+  },
+  "dependencies": {
+    "@pinia/nuxt": "^0.4.7",
+    "pinia": "^2.0.33"
   }
 }
