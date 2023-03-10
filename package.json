@@ -1,0 +1,39 @@
+{
+  "name": "blog-client-nuxt_v0.0.1",
+  "author": {
+    "name": "huangbh",
+    "email": "578092215@qq.com"
+  },
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare",
+    "lint": "eslint --ext .ts,.js,.vue .",
+    "prepare": "husky install",
+    "commit": "git-cz"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.4.4",
+    "@commitlint/cz-commitlint": "^17.4.4",
+    "@nuxtjs/eslint-config-typescript": "^12.0.0",
+    "commitizen": "^4.3.0",
+    "cz-customizable": "^7.0.0",
+    "eslint": "^8.35.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.1.2",
+    "nuxt": "^3.2.3"
+  },
+  "lint-staged": {
+    "./**/*.{js,jsx,ts,tsx,vue}": [
+      "eslint --fix"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "@commitlint/cz-commitlint"
+    }
+  }
+}
