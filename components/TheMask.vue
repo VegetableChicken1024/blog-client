@@ -10,12 +10,6 @@ const props = defineProps<{visible: boolean, transform?: {
   delay: number
 }}>()
 const emits = defineEmits<{(event: 'close'): void}>()
-// mask出现时，阻止body滚动
-watch(() => props.visible, (val) => {
-  window.document.documentElement.style.overflow = val ? 'hidden' : 'auto'
-  // body
-  window.document.body.style.overflow = val ? 'hidden' : 'auto'
-})
 // 蒙层移动的样式
 const maskMoveStyle = computed<StyleValue>(() => {
   if (props.transform) {

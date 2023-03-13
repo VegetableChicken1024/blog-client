@@ -27,6 +27,8 @@ publicStore.fetchIcons()
 // 用于控制侧边栏的显示与隐藏
 const visibleStore = useVisibleStore()
 const visibleAside = computed(() => visibleStore.visibleAside)
+const visibleSearch = computed(() => visibleStore.visibleSearch)
+const visibleLoading = computed(() => visibleStore.visibleLoading)
 const toggleAside = () => visibleStore.toggleAside()
 // 判断资源是否加载完毕
 visibleStore.visibleLoading = true
@@ -38,6 +40,16 @@ onMounted(() => {
     window.addEventListener('load', () => {
       visibleStore.visibleLoading = false
     })
+  }
+})
+watch([visibleAside, visibleSearch, visibleLoading], ([aside, search, loading]) => {
+  if (aside || search || loading) {
+    window.document.documentElement.style.overflow = 'hidden'
+    window.document.body.style.overflow = 'hidden'
+  } else {
+    window.document.documentElement.style.overflow = 'auto'
+    window.document.body.style.overflow = 'auto'
+    console.log('auto')
   }
 })
 </script>

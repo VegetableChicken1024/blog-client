@@ -29,9 +29,6 @@ const handleEsc = (event: KeyboardEvent) => {
   if (event.key === 'Escape') { emits('toggle') }
 }
 watch(() => props.visible, (val) => {
-  window.document.documentElement.style.overflow = val ? 'hidden' : 'auto'
-  // body
-  window.document.body.style.overflow = val ? 'hidden' : 'auto'
   val ? window.addEventListener('keydown', handleEsc) : window.removeEventListener('keydown', handleEsc)
 })
 const router = useRouter()
