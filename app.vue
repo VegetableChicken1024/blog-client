@@ -49,7 +49,6 @@ watch([visibleAside, visibleSearch, visibleLoading], ([aside, search, loading]) 
   } else {
     window.document.documentElement.style.overflow = 'auto'
     window.document.body.style.overflow = 'auto'
-    console.log('auto')
   }
 })
 </script>
