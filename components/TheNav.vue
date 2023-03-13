@@ -36,8 +36,9 @@ const fetchBannerText = async () => {
     }, i * 100)
   }
 }
+const isFetch = ref(true)
 watch(() => visibleStore.visibleLoading, (val) => {
-  !val && fetchBannerText()
+  if (!val && isFetch.value) { fetchBannerText(); isFetch.value = false }
 })
 </script>
 
