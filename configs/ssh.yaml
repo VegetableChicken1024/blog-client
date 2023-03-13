@@ -1,0 +1,6 @@
+SSH_CONNECT_CONFIG:
+  host: ''
+  username: ''
+  password: ''
+  port: 22
+  path: ''

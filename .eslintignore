@@ -2,3 +2,6 @@ tsconfig.json
 package.json
 .eslintrc.cjs
 commitlint.config.ts
+ecosystem.config.js
+deploy.mjs
+version.mjs
