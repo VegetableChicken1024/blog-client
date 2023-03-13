@@ -6,5 +6,34 @@
 </template>
 
 <script lang="ts" setup>
+import { getScrollElement } from '~/utils'
 const welcomeText = '莫等闲、白了少年头，空悲切。'
+// 记录scroll位置
+const scrollTop = ref(0)
+// 是否第一次加载
+const isMounted = ref(false)
+const scrollElement = ref<HTMLElement | null>(null)
+const handleScroll = () => {
+  scrollTop.value =
+    document.documentElement.scrollTop ||
+    window.pageXOffset ||
+    document.body.scrollTop
+  if (isMounted.value) {
+    scrollElement.value = getScrollElement()
+  }
+}
+onMounted(() => {
+  scrollElement.value = getScrollElement()
+  nextTick(() => {
+    handleScroll()
+    isMounted.value = true
+  })
+})
+onActivated(() => {
+  window.addEventListener('scroll', handleScroll)
+  scrollTop.value && scrollElement.value?.scrollTo({ top: scrollTop.value })
+})
+onDeactivated(() => {
+  window.removeEventListener('scroll', handleScroll)
+})
 </script>
