@@ -1,0 +1,114 @@
+@screenWidth: 840px;
+@keyframes flashing {
+  50% {
+    opacity: 0;
+  }
+}
+nav {
+  background: url('~/assets/images/headerbg.jpg') center center / cover
+    no-repeat;
+  position: relative;
+  background-attachment: fixed;
+  width: 100%;
+  overflow: hidden;
+  left: 0;
+  @media (max-width: @screenWidth) {
+    background-attachment: inherit;
+  }
+
+  // 两个用于分割图片的div
+  .slant_left,
+  .slant_right {
+    background: #fff;
+    width: 101%;
+    position: absolute;
+    bottom: -80px;
+    height: 200px;
+    @media (max-width: @screenWidth) {
+      display: none;
+    }
+  }
+  .slant_left {
+    right: 48%;
+    transform: rotate(6deg);
+  }
+  .slant_right {
+    left: 48%;
+    transform: rotate(-6deg);
+  }
+  .mask {
+    // background-color: rgba(0, 0, 0, 0.3);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    .avatar {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      border: 5px solid rgba(255, 255, 255, 0.3);
+      overflow: hidden;
+      > img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+    .text {
+      width: 80%;
+      max-width: 520px;
+      margin-top: 25px;
+      overflow-wrap: break-word;
+      text-align: center;
+      font-weight: 500;
+      // line-height: 1.5;
+      color: #fff;
+      font-size: 16px;
+      min-height: 90px;
+      padding: 20px 30px;
+      color: #eaeadf;
+      background: rgba(0, 0, 0, 0.66);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      > span {
+        &::after {
+          content: '-';
+          margin-left: 3.2px;
+          animation: flashing 0.7s infinite;
+          position: relative;
+          top: 6px;
+        }
+      }
+    }
+    .message {
+      max-width: 80%;
+      margin-top: 25px;
+      display: flex;
+      > div {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        background: #fff;
+        margin: 0 6px;
+        cursor: pointer;
+        > img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+
+  @media (max-width: @screenWidth) {
+    height: 450px;
+  }
+  @media (min-width: @screenWidth) {
+    height: 630px;
+  }
+}
