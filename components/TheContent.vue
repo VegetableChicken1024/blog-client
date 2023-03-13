@@ -8,6 +8,7 @@
       <h1>{{ titleText }}</h1>
       <div
         class="article_list_wrapper"
+        @click="router.push({ path: `/detail/1` })"
       >
         <div class="article_list">
           <div class="article_left">
@@ -43,6 +44,7 @@ withDefaults(defineProps<{ titleText?: string; contentText: string }>(), {
   titleText: '',
   contentText: ''
 })
+const router = useRouter()
 const isMounted = ref(false)
 onMounted(() => {
   setTimeout(() => {
