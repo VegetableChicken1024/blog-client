@@ -9,3 +9,14 @@ export const getScrollElement = () => {
     ? document.documentElement
     : document.body
 }
+
+// 控制页面滚动
+export const disableScroll = (visible: boolean) => {
+  if (visible) {
+    window.document.documentElement.style.overflow = 'hidden';
+    window.document.body.style.overflow = 'hidden';
+  } else {
+    window.document.documentElement.style.overflow = 'auto';
+    window.document.body.style.overflow = 'auto';
+  }
+};

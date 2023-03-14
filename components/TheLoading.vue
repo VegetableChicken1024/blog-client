@@ -1,35 +1,32 @@
 <template>
-  <div v-if="visibleLoading" id="preload" ref="preLoadRef">
+  <div v-show="visibleLoading" id="preload" ref="preLoadRef">
     <div class="preload_inner" />
   </div>
 </template>
 
 <script lang="ts" setup>
-import { useVisibleStore } from '~/stores/visible.store'
-const visibleStore = useVisibleStore()
-const router = useRouter()
-const visibleAside = computed(() => visibleStore.visibleAside)
-const visibleSearch = computed(() => visibleStore.visibleSearch)
-const visibleLoading = computed(() => visibleStore.visibleLoading)
-const toggleAside = () => visibleStore.toggleAside()
-const toggleSearch = () => visibleStore.toggleSearch()
+import { useVisibleStore } from "~/stores/visible.store";
+const visibleStore = useVisibleStore();
+const router = useRouter();
+const visibleAside = computed(() => visibleStore.visibleAside);
+const visibleSearch = computed(() => visibleStore.visibleSearch);
+const visibleLoading = computed(() => visibleStore.visibleLoading);
+const toggleAside = () => visibleStore.toggleAside();
+const toggleSearch = () => visibleStore.toggleSearch();
 // 路由拦截
 router.beforeEach((_to, _from, next) => {
-  visibleStore.visibleLoading = true
-  if (visibleAside.value || visibleSearch.value) {
-    setTimeout(() => {
-      next()
-    }, 500)
-  } else { next() }
-  visibleAside.value && toggleAside()
-  visibleSearch.value && toggleSearch()
-})
+  visibleStore.visibleLoading = true;
+  disableScroll(true);
+  next();
+  visibleAside.value && toggleAside();
+  visibleSearch.value && toggleSearch();
+});
 router.afterEach(() => {
-  nextTick(() => {
-    visibleStore.visibleLoading = false
-  })
-})
-
+  setTimeout(() => {
+    visibleStore.visibleLoading = false;
+  }, 500);
+  disableScroll(false);
+});
 </script>
 
 <style lang="less" scoped>
@@ -66,7 +63,7 @@ router.afterEach(() => {
     align-items: center;
     justify-content: center;
     &::before {
-      content: '';
+      content: "";
       position: absolute;
       top: 5px;
       left: 5px;
@@ -78,7 +75,7 @@ router.afterEach(() => {
       animation: spin 3s linear infinite;
     }
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       top: 15px;
       left: 15px;

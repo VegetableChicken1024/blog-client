@@ -28,7 +28,6 @@ publicStore.fetchIcons()
 const visibleStore = useVisibleStore()
 const visibleAside = computed(() => visibleStore.visibleAside)
 const visibleSearch = computed(() => visibleStore.visibleSearch)
-const visibleLoading = computed(() => visibleStore.visibleLoading)
 const toggleAside = () => visibleStore.toggleAside()
 // 判断资源是否加载完毕
 visibleStore.visibleLoading = true
@@ -42,13 +41,11 @@ onMounted(() => {
     })
   }
 })
-watch([visibleAside, visibleSearch, visibleLoading], ([aside, search, loading]) => {
-  if (aside || search || loading) {
-    window.document.documentElement.style.overflow = 'hidden'
-    window.document.body.style.overflow = 'hidden'
+watch([visibleAside, visibleSearch], ([aside, search]) => {
+  if (aside || search) {
+    disableScroll(true)
   } else {
-    window.document.documentElement.style.overflow = 'auto'
-    window.document.body.style.overflow = 'auto'
+    disableScroll(false)
   }
 })
 </script>
