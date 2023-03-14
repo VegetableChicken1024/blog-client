@@ -27,6 +27,7 @@ onMounted(() => {
   nextTick(() => {
     handleScroll();
     isMounted.value = true;
+    scrollElement.value?.scrollTo({ top: 0 });
   });
 });
 onActivated(() => {
