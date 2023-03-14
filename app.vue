@@ -1,9 +1,9 @@
 <template>
-  <div style="height: 1000vh;">
+  <div style="height: 1000vh">
     <LazyTheLoading />
     <LazyTheAside />
     <LazyTheHeader />
-    <div :class="{wrapper: true, open: visibleAside}">
+    <div :class="{ wrapper: true, open: visibleAside }">
       <NuxtPage :keepalive="{}" />
     </div>
     <LazyTheMask
@@ -11,7 +11,7 @@
       :transform="{
         direction: 'row',
         instance: 250,
-        delay: 500
+        delay: 500,
       }"
       @close="toggleAside"
     />
@@ -19,35 +19,42 @@
 </template>
 
 <script setup lang="ts">
-import { usePublicStore } from './stores/public.store'
-import { useVisibleStore } from './stores/visible.store'
+import { usePublicStore } from "./stores/public.store";
+import { useVisibleStore } from "./stores/visible.store";
 // 用于获取svg图标
-const publicStore = usePublicStore()
-publicStore.fetchIcons()
+const publicStore = usePublicStore();
+publicStore.fetchIcons();
 // 用于控制侧边栏的显示与隐藏
-const visibleStore = useVisibleStore()
-const visibleAside = computed(() => visibleStore.visibleAside)
-const visibleSearch = computed(() => visibleStore.visibleSearch)
-const toggleAside = () => visibleStore.toggleAside()
+const visibleStore = useVisibleStore();
+const visibleAside = computed(() => visibleStore.visibleAside);
+const visibleSearch = computed(() => visibleStore.visibleSearch);
+const toggleAside = () => visibleStore.toggleAside();
 // 判断资源是否加载完毕
-visibleStore.visibleLoading = true
+visibleStore.visibleLoading = true;
 onMounted(() => {
-  if (document.readyState === 'complete') {
-    visibleStore.visibleLoading = false
+  if (document.readyState === "complete") {
+    visibleStore.visibleLoading = false;
   } else {
     // TODO: 有待优化
-    window.addEventListener('load', () => {
-      visibleStore.visibleLoading = false
-    })
+    window.addEventListener("load", () => {
+      visibleStore.visibleLoading = false;
+    });
   }
-})
+});
 watch([visibleAside, visibleSearch], ([aside, search]) => {
   if (aside || search) {
-    disableScroll(true)
+    disableScroll(true);
   } else {
-    disableScroll(false)
+    disableScroll(false);
   }
-})
+});
+const theme = computed(() => publicStore.theme);
+// 设置主题
+useHead({
+  htmlAttrs: {
+    "data-theme": theme.value,
+  },
+});
 </script>
 
 <style lang="less" scoped>
