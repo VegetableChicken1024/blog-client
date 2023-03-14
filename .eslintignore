@@ -5,3 +5,4 @@ commitlint.config.ts
 ecosystem.config.js
 deploy.mjs
 version.mjs
+init.mjs

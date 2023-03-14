@@ -13,7 +13,7 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "lint": "eslint --ext .ts,.js,.vue .",
-    "prepare": "husky install",
+    "prepare": "husky install && node scripts/init.mjs",
     "commit": "git-cz",
     "deploy": "node scripts/deploy.mjs"
   },
