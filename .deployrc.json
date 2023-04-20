@@ -1,0 +1,18 @@
+{
+  "configPaths": [
+    "./configs/ssh.yaml"
+  ],
+  "remotePath": "/home/blog-client",
+  "localFilePath": "./zipFiles",
+  "buildPath": [
+    "./.output/",
+    "./package.json",
+    "./ecosystem.config.js"
+  ],
+  "remoteBakPath": "/home/bak/blog-client",
+  "zipPrefix": "blog-client",
+  "remoteCommands": [
+    "pm2 restart blog-client"
+  ],
+  "buildCommand": "yarn build"
+}

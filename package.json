@@ -7,15 +7,15 @@
   },
   "private": true,
   "scripts": {
-    "build": "node scripts/version.mjs && nuxt build",
+    "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "lint": "eslint --ext .ts,.js,.vue .",
-    "prepare": "husky install && node scripts/init.mjs",
+    "prepare": " husky install && huangbh-init",
     "commit": "git-cz",
-    "deploy": "node scripts/deploy.mjs"
+    "deploy": "huangbh-deploy"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.4.4",
@@ -34,7 +34,8 @@
     "lint-staged": "^13.1.2",
     "node-ssh": "^13.0.1",
     "nuxt": "^3.2.3",
-    "yaml": "^2.2.1"
+    "yaml": "^2.2.1",
+    "@bh_huang/auto-deploy": "^0.0.9"
   },
   "lint-staged": {
     "./**/*.{js,jsx,ts,tsx,vue}": []
