@@ -23,6 +23,10 @@ import { useAdminStore } from "~/stores/admin.store";
 import { storeToRefs } from "pinia";
 const adminStore = useAdminStore();
 const { isCollapse } = storeToRefs(adminStore);
+const hasPermission = computed(() => adminStore.hasPermission);
+if (!hasPermission.value) {
+  adminStore.showPasswordPrompt();
+}
 </script>
 <style scoped lang="less">
 .aside {
