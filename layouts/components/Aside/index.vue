@@ -1,5 +1,5 @@
 <template>
-  <el-scrollbar style="background: #191a20" :view-style="{ width: '150px' }">
+  <el-scrollbar style="background: #191a20" :view-style="{ width: '160px' }">
     <el-menu
       class="menu-height"
       :default-active="defaultActive"
@@ -22,6 +22,28 @@
           <el-icon size="1.2rem"><component :is="route.icon" /></el-icon>
           <span>{{ route.title }}</span>
         </el-menu-item>
+        <el-sub-menu
+          :index="String(index)"
+          v-show="route.children && route.children.length"
+        >
+          <template #title>
+            <el-icon size="1.2rem"><component :is="route.icon" /></el-icon>
+            <span>{{ route.title }}</span>
+          </template>
+          <el-menu-item-group>
+            <el-menu-item
+              v-for="(child, childIndex) in route.children"
+              :key="index + '_' + childIndex"
+              :index="index + '_' + childIndex"
+              @click="
+                (e) => {
+                  handleClick(e, index);
+                }
+              "
+              >{{ child.title }}</el-menu-item
+            >
+          </el-menu-item-group>
+        </el-sub-menu>
       </template>
     </el-menu>
   </el-scrollbar>
@@ -32,27 +54,22 @@ import { ref } from "vue";
 import { useAdminStore } from "~/stores/admin.store";
 import { storeToRefs } from "pinia";
 import { MenuItemRegistered } from "element-plus";
-import { Document, HomeFilled } from "@element-plus/icons-vue";
+import { routes } from "./route";
 const adminStore = useAdminStore();
 const { isCollapse } = storeToRefs(adminStore);
 const router = useRouter();
-const menuList = [
-  {
-    title: "首页",
-    icon: HomeFilled,
-    path: "/admin",
-    children: [],
-  },
-  {
-    title: "文章管理",
-    icon: Document,
-    path: "/admin/article",
-    children: [],
-  },
-];
+const menuList = routes;
 const defaultActive = ref("0");
 const handleClick = (e: MenuItemRegistered, index: number) => {
-  router.push(menuList[index].path);
+  let path = "";
+  if (e.index.includes("_")) {
+    // 子菜单
+    const arr = e.index.split("_");
+    path = menuList[Number(arr[0])].children[Number(arr[1])].path;
+  } else {
+    path = menuList[index].path;
+  }
+  router.push(path);
 };
 watch(
   () => router.currentRoute.value.path,
