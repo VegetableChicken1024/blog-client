@@ -4,16 +4,15 @@
 </template>
 
 <script lang="ts" setup>
-import { usePublicStore } from '~~/stores/public.store'
-const publicStore = usePublicStore()
-const props = defineProps<{name: string}>()
+import { usePublicStore } from "~~/stores/public.store";
+const publicStore = usePublicStore();
+const props = defineProps<{ name: string }>();
 const arr = Object.entries(publicStore.icons).filter((i) => {
-  return i[0] === props.name
-})
-const icon = await arr[0][1]?.().then((res: any) => {
-  return res
-})
-
+  return i[0] === props.name;
+});
+const icon = await arr[0]?.[1]?.().then((res: any) => {
+  return res;
+});
 </script>
 
 <style>
